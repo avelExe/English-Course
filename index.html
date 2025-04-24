@@ -26,11 +26,11 @@
     <header class="header">
         <div class="container">
             <nav class="nav">
-                <div class="logo">
-                    <img src="images/logo.png" alt="Logo" class="logo-img">
-                    <span class="logo-text">English Course</span>
+                <div class="logo interactive-element">
+                    <img src="images/logo.svg" alt="Logo" class="logo-img">
+                    <span class="logo-text text-gradient">English Course</span>
                 </div>
-                <ul class="nav-links">
+                <ul class="nav-links glass-effect">
                     <li><a href="#home" class="nav-link active">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M3 12L5 10M5 10L12 3L19 10M5 10V20C5 20.5523 5.44772 21 6 21H9M19 10L21 12M19 10V20C19 20.5523 18.5523 21 18 21H15M9 21C9.55228 21 10 20.5523 10 20V16C10 15.4477 10.4477 15 11 15H13C13.5523 15 14 15.4477 14 16V20C14 20.5523 14.4477 21 15 21M9 21H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -64,11 +64,30 @@
     <section class="hero" id="home">
         <div class="container">
             <div class="hero-content">
-                <h1 class="main-title" id="title-a">Освойте английский язык за 30 дней</h1>
-                <h1 class="main-title hidden" id="title-b">От новичка до уверенного разговора за месяц</h1><br>
+                <h1 class="main-title" id="title-a">Освойте английский язык за 30 дней</h1><br><br>
                 <button class="cta-button">Забронировать место со скидкой 50%</button><br><br>
-                <p class="subtitle">До старта нового потока осталось:</p>
-                <div id="timer" class="hero-timer">2 дня 12:00:00</div>
+                <h1 class="main-title hidden" id="title-b">От новичка до уверенного разговора за месяц</h1><br>
+                <div class="timer">
+                    <h3 class="timer-title">До старта нового потока осталось:</h3>
+                    <div class="timer-display">
+                        <div class="timer-unit">
+                            <div class="timer-number" id="days">00</div>
+                            <div class="timer-label">Дней</div>
+                        </div>
+                        <div class="timer-unit">
+                            <div class="timer-number" id="hours">00</div>
+                            <div class="timer-label">Часов</div>
+                        </div>
+                        <div class="timer-unit">
+                            <div class="timer-number" id="minutes">00</div>
+                            <div class="timer-label">Минут</div>
+                        </div>
+                        <div class="timer-unit">
+                            <div class="timer-number" id="seconds">00</div>
+                            <div class="timer-label">Секунд</div>
+                        </div>
+                    </div>
+                </div>
                 <p class="guarantee-small">Гарантия возврата средств в течение первой недели</p>
             </div>
         </div>
@@ -99,20 +118,34 @@
         <div class="container">
             <h2 class="section-title float-animation">Как проходит обучение</h2>
             <div class="features-grid">
-                <div class="feature-card">
-                    <img src="images/time-icon.svg" alt="Time">
+                <div class="feature-card interactive-element">
+                    <svg class="feature-icon" width="96" height="96" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 8V12L15 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/>
+                        <path d="M3.6 9H7.2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M16.8 9H20.4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M6.3 16.8L8.9 14.2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M15.1 14.2L17.7 16.8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
                     <h3>15 минут в день</h3>
-                    <p>Уроки в удобное время</p>
+                    <p>Короткие, но эффективные уроки в удобное для вас время</p>
                 </div>
-                <div class="feature-card">
-                    <img src="images/practice-icon.svg" alt="Practice">
+                <div class="feature-card interactive-element">
+                    <svg class="feature-icon" width="96" height="96" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 13.8214 2.48697 15.5291 3.33782 17L2.5 21.5L7 20.6622C8.47087 21.513 10.1786 22 12 22Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M8 12H8.01M12 12H12.01M16 12H16.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
                     <h3>Разговорные практики</h3>
-                    <p>Общение с носителями языка</p>
+                    <p>Живое общение с носителями языка и другими студентами</p>
                 </div>
-                <div class="feature-card">
-                    <img src="images/game-icon.svg" alt="Game">
+                <div class="feature-card interactive-element">
+                    <svg class="feature-icon" width="96" height="96" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M17 8H7C5.89543 8 5 8.89543 5 10V16C5 17.1046 5.89543 18 7 18H17C18.1046 18 19 17.1046 19 16V10C19 8.89543 18.1046 8 17 8Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M12 12L15 15M15 12L12 15M8 12H8.01M16 12H16.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M15 8V6C15 5.46957 14.7893 4.96086 14.4142 4.58579C14.0391 4.21071 13.5304 4 13 4H11C10.4696 4 9.96086 4.21071 9.58579 4.58579C9.21071 4.96086 9 5.46957 9 6V8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
                     <h3>Геймификация</h3>
-                    <p>Учитесь в игровой форме</p>
+                    <p>Интерактивные задания и игровые элементы для эффективного обучения</p>
                 </div>
             </div>
         </div>
@@ -262,7 +295,7 @@
             threshold: 0.1
         });
 
-        document.querySelectorAll('.feature-card, .result-card, .price-card').forEach(el => {
+        document.querySelectorAll('.result-card, .price-card').forEach(el => {
             observer.observe(el);
         });
     </script>

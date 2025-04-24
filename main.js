@@ -38,58 +38,38 @@ function getTimerEndDate() {
     return endDate;
 }
 
-// Countdown Timer
+// Timer functionality
 function updateTimer() {
-    const timerElement = document.getElementById('timer');
-    const targetDate = getTimerEndDate();
-    
-    function calculateTimeLeft() {
+    const endDate = new Date();
+    endDate.setDate(endDate.getDate() + 2); // 2 days from now
+    endDate.setHours(endDate.getHours() + 12); // plus 12 hours
+
+    function update() {
         const now = new Date();
-        const difference = targetDate - now;
-        
-        if (difference <= 0) {
-            // Reset timer for next week if expired
-            localStorage.removeItem(TIMER_END_DATE_KEY);
-            return calculateTimeLeft();
+        const diff = endDate - now;
+
+        if (diff <= 0) {
+            clearInterval(interval);
+            return;
         }
-        
-        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-        
-        return {
-            days,
-            hours,
-            minutes,
-            seconds,
-            total: difference
-        };
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+        document.getElementById('days').textContent = String(days).padStart(2, '0');
+        document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+        document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+        document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
     }
-    
-    function updateDisplay() {
-        const t = calculateTimeLeft();
-        
-        const timeString = `
-            <span class="timer-unit">${t.days}<small>дн</small></span>
-            <span class="timer-unit">${String(t.hours).padStart(2, '0')}<small>ч</small></span>
-            <span class="timer-unit">${String(t.minutes).padStart(2, '0')}<small>мин</small></span>
-            <span class="timer-unit">${String(t.seconds).padStart(2, '0')}<small>сек</small></span>
-        `;
-        
-        timerElement.innerHTML = timeString;
-    }
-    
-    updateDisplay();
-    const timeInterval = setInterval(updateDisplay, 1000);
-    
-    // Cleanup on page unload
-    window.addEventListener('unload', () => {
-        clearInterval(timeInterval);
-    });
+
+    const interval = setInterval(update, 1000);
+    update(); // Initial update
 }
 
-updateTimer();
+// Initialize timer when page loads
+document.addEventListener('DOMContentLoaded', updateTimer);
 
 // Test Questions
 const questions = [
