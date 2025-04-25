@@ -3,22 +3,36 @@ document.addEventListener('DOMContentLoaded', () => {
     const burgerMenu = document.querySelector('.burger-menu');
     const navContainer = document.querySelector('.nav-container');
     const menuOverlay = document.querySelector('.menu-overlay');
-    const navLinks = document.querySelectorAll('.nav-link');
+    const header = document.querySelector('.header');
+    
+    if (!burgerMenu || !navContainer) return;
 
     function toggleMenu() {
         burgerMenu.classList.toggle('active');
         navContainer.classList.toggle('active');
-        menuOverlay.classList.toggle('active');
         document.body.classList.toggle('menu-open');
+        
+        if (menuOverlay) {
+            menuOverlay.classList.toggle('active');
+        }
     }
 
     // Обработчик клика по бургер-меню
-    burgerMenu.addEventListener('click', toggleMenu);
+    burgerMenu.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleMenu();
+    });
 
-    // Закрытие меню при клике по оверлею
-    menuOverlay.addEventListener('click', toggleMenu);
+    // Закрытие меню при клике вне его
+    document.addEventListener('click', (e) => {
+        const isClickInside = navContainer.contains(e.target) || burgerMenu.contains(e.target);
+        if (!isClickInside && navContainer.classList.contains('active')) {
+            toggleMenu();
+        }
+    });
 
     // Закрытие меню при клике по ссылке
+    const navLinks = document.querySelectorAll('.nav-link');
     navLinks.forEach(link => {
         link.addEventListener('click', () => {
             if (navContainer.classList.contains('active')) {
@@ -27,7 +41,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Закрытие меню при ресайзе окна
+    // Предотвращение закрытия меню при клике внутри него
+    navContainer.addEventListener('click', (e) => {
+        e.stopPropagation();
+    });
+
+    // Закрытие меню при ресайзе
     let lastWidth = window.innerWidth;
     window.addEventListener('resize', () => {
         if (window.innerWidth !== lastWidth) {
@@ -36,6 +55,26 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             lastWidth = window.innerWidth;
         }
+    });
+
+    // Обработка скролла
+    let lastScroll = 0;
+    window.addEventListener('scroll', () => {
+        const currentScroll = window.pageYOffset;
+        
+        if (currentScroll <= 0) {
+            header.classList.remove('scroll-up');
+            return;
+        }
+        
+        if (currentScroll > lastScroll && !header.classList.contains('scroll-down')) {
+            header.classList.remove('scroll-up');
+            header.classList.add('scroll-down');
+        } else if (currentScroll < lastScroll && header.classList.contains('scroll-down')) {
+            header.classList.remove('scroll-down');
+            header.classList.add('scroll-up');
+        }
+        lastScroll = currentScroll;
     });
 });
 
