@@ -30,24 +30,21 @@
                     <img src="logo.svg" alt="Logo" class="logo-img">
                     <span class="logo-text text-gradient">English Course</span>
                 </div>
-                
-                <!-- Добавляем кнопку бургер-меню -->
-                <button class="burger-menu" aria-label="Открыть меню">
+
+                <button class="burger-menu" aria-label="Открыть меню" aria-expanded="false">
                     <span class="burger-line"></span>
                     <span class="burger-line"></span>
                     <span class="burger-line"></span>
                 </button>
 
-                <!-- Добавляем оверлей для мобильного меню -->
-                <div class="menu-overlay"></div>
-
-                <!-- Оборачиваем меню в отдельный контейнер -->
-                <div class="nav-container">
-                    <ul class="nav-links">
-                        <li><a href="#home" class="nav-link active">Главная</a></li>
-                        <li><a href="#about" class="nav-link">О курсе</a></li>
-                        <li><a href="#reviews" class="nav-link">Отзывы</a></li>
-                        <li><a href="#contacts" class="nav-link">Контакты</a></li>
+                <div class="menu-overlay" aria-hidden="true"></div>
+                
+                <div class="nav-container" role="navigation" aria-label="Основное меню">
+                    <ul class="nav-links" role="menu">
+                        <li role="none"><a href="#home" class="nav-link active" role="menuitem">Главная</a></li>
+                        <li role="none"><a href="#about" class="nav-link" role="menuitem">О курсе</a></li>
+                        <li role="none"><a href="#reviews" class="nav-link" role="menuitem">Отзывы</a></li>
+                        <li role="none"><a href="#contacts" class="nav-link" role="menuitem">Контакты</a></li>
                     </ul>
                 </div>
             </nav>

@@ -7,13 +7,24 @@ document.addEventListener('DOMContentLoaded', () => {
     
     if (!burgerMenu || !navContainer) return;
 
-    function toggleMenu() {
-        burgerMenu.classList.toggle('active');
-        navContainer.classList.toggle('active');
-        document.body.classList.toggle('menu-open');
+    function toggleMenu(show) {
+        const isOpen = show === undefined ? !navContainer.classList.contains('active') : show;
         
-        if (menuOverlay) {
-            menuOverlay.classList.toggle('active');
+        burgerMenu.classList.toggle('active', isOpen);
+        navContainer.classList.toggle('active', isOpen);
+        menuOverlay.classList.toggle('active', isOpen);
+        document.body.classList.toggle('menu-open', isOpen);
+        
+        // Обновляем ARIA-атрибуты
+        burgerMenu.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        menuOverlay.setAttribute('aria-hidden', (!isOpen).toString());
+        
+        // Управляем фокусом
+        if (isOpen) {
+            const firstLink = navContainer.querySelector('.nav-link');
+            if (firstLink) firstLink.focus();
+        } else {
+            burgerMenu.focus();
         }
     }
 
@@ -27,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('click', (e) => {
         const isClickInside = navContainer.contains(e.target) || burgerMenu.contains(e.target);
         if (!isClickInside && navContainer.classList.contains('active')) {
-            toggleMenu();
+            toggleMenu(false);
         }
     });
 
@@ -36,9 +47,16 @@ document.addEventListener('DOMContentLoaded', () => {
     navLinks.forEach(link => {
         link.addEventListener('click', () => {
             if (navContainer.classList.contains('active')) {
-                toggleMenu();
+                toggleMenu(false);
             }
         });
+    });
+
+    // Обработка клавиши Escape
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && navContainer.classList.contains('active')) {
+            toggleMenu(false);
+        }
     });
 
     // Предотвращение закрытия меню при клике внутри него
@@ -51,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('resize', () => {
         if (window.innerWidth !== lastWidth) {
             if (navContainer.classList.contains('active')) {
-                toggleMenu();
+                toggleMenu(false);
             }
             lastWidth = window.innerWidth;
         }
