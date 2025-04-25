@@ -1,3 +1,44 @@
+// Mobile Menu Functionality
+document.addEventListener('DOMContentLoaded', () => {
+    const burgerMenu = document.querySelector('.burger-menu');
+    const navContainer = document.querySelector('.nav-container');
+    const menuOverlay = document.querySelector('.menu-overlay');
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    function toggleMenu() {
+        burgerMenu.classList.toggle('active');
+        navContainer.classList.toggle('active');
+        menuOverlay.classList.toggle('active');
+        document.body.classList.toggle('menu-open');
+    }
+
+    // Обработчик клика по бургер-меню
+    burgerMenu.addEventListener('click', toggleMenu);
+
+    // Закрытие меню при клике по оверлею
+    menuOverlay.addEventListener('click', toggleMenu);
+
+    // Закрытие меню при клике по ссылке
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            if (navContainer.classList.contains('active')) {
+                toggleMenu();
+            }
+        });
+    });
+
+    // Закрытие меню при ресайзе окна
+    let lastWidth = window.innerWidth;
+    window.addEventListener('resize', () => {
+        if (window.innerWidth !== lastWidth) {
+            if (navContainer.classList.contains('active')) {
+                toggleMenu();
+            }
+            lastWidth = window.innerWidth;
+        }
+    });
+});
+
 // A/B Testing
 document.addEventListener('DOMContentLoaded', () => {
     // Randomly show one of two titles
